@@ -9,3 +9,11 @@ describe("template spec", () => {
     cy.url().should("include", "/dashboard");
   });
 });
+it("ne passes pas ", () => {
+  cy.visit("/login");
+  cy.get('[data-testid="signin-username"]').type("johndoe");
+  cy.get('[data-testid="signin-password"]').type("wrongpassword123");
+  cy.get('[data-testid="signin-submit"]').click();
+  //cy.get('[data-testid="signin-password"]').type("s3cret{enter}");une autre methode de mettre un MP et valider
+  cy.url().should("include", "/login");
+});
