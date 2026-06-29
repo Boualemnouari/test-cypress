@@ -4,4 +4,5 @@ describe("clique “Se connecter” sans rien saisir", () => {
     cy.url().should("include", "/login");
     cy.get('[data-testid="signin-submit"]').click();
     cy.url().should("include", "/login");
+  });
 });
