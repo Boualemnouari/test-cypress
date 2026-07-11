@@ -19,26 +19,14 @@ it.only("ne passes pas ", () => {
 });*/
 //éviter de répéter le code
 describe("Login", () => {
-  let user;
-
-  beforeEach(() => {
-    cy.fixture("user").then((fixtureUser) => {
-      user = fixtureUser;
-      cy.visit("/login");
-      cy.get('[data-testid="signin-username"]').type(user.username);
-    });
-  });
-
   it("Connexion réussie", () => {
-    cy.get('[data-testid="signin-password"]').type(user.password);
-    cy.get('[data-testid="signin-submit"]').click();
+    cy.login();
 
     cy.url().should("include", "/dashboard");
   });
 
   it("Connexion refusée", () => {
-    cy.get('[data-testid="signin-password"]').type(`${user.password}1`);
-    cy.get('[data-testid="signin-submit"]').click();
+    cy.login({ password: "wrongpassword1" });
 
     cy.url().should("include", "/login");
     cy.get('[data-testid="signin-error"]').should("be.visible"); // Vérifie que le message d'erreur est affiché

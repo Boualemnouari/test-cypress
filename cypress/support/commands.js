@@ -7,6 +7,12 @@
 // commands please read more here:
 // https://on.cypress.io/custom-commands
 // ***********************************************
+
+import { loginWithFixture } from './Login';
+
+Cypress.Commands.add('login', (overrides = {}) => {
+	loginWithFixture(overrides);
+});
 //
 //
 // -- This is a parent command --
