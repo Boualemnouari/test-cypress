@@ -8,10 +8,10 @@
 // https://on.cypress.io/custom-commands
 // ***********************************************
 
-import { loginWithFixture } from './Login';
+import { loginWithFixture } from "./Login";
 
-Cypress.Commands.add('login', (overrides = {}) => {
-	loginWithFixture(overrides);
+Cypress.Commands.add("login", (overrides = {}) => {
+  loginWithFixture(overrides);
 });
 //
 //
