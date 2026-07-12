@@ -10,6 +10,8 @@
 
 import { loginWithFixture } from "./Login";
 
+// Commande custom `cy.login()` : connecte l'utilisateur de la fixture,
+// avec possibilité de surcharger certains champs (ex: cy.login({ password: "faux" })).
 Cypress.Commands.add("login", (overrides = {}) => {
   loginWithFixture(overrides);
 });

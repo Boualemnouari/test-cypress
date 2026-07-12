@@ -1,4 +1,7 @@
-/*describe("template spec", () => {
+/* Ancienne version des tests, conservée en commentaire à titre d'historique :
+   elle saisissait les identifiants "en dur" à chaque test au lieu d'utiliser
+   la commande cy.login() + la fixture (voir remplacement ci-dessous).
+describe("template spec", () => {
   it.skip("passes", () => {
     cy.visit("/login");
     cy.get('[data-testid="signin-username"]').type("johndoe");
@@ -17,14 +20,19 @@ it.only("ne passes pas ", () => {
   //cy.get('[data-testid="signin-password"]').type("s3cret{enter}");une autre methode de mettre un MP et valider
   cy.url().should("include", "/login");
 });*/
-//éviter de répéter le code
+
+// éviter de répéter le code : on passe par la commande custom cy.login()
+// (définie dans support/commands.js) qui utilise la fixture user.json.
 describe("Login", () => {
+  // Cas nominal : identifiants valides (fixture) -> redirection dashboard
   it("Connexion réussie", () => {
     cy.login();
 
     cy.url().should("include", "/dashboard");
   });
 
+  // Cas d'échec : mot de passe volontairement erroné -> on reste sur /login
+  // et un message d'erreur (FR ou EN selon la langue du navigateur) s'affiche.
   it("Connexion refusée", () => {
     cy.login({ password: "wrongpassword1" });
 

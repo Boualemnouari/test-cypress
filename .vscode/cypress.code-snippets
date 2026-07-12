@@ -1,0 +1,32 @@
+{
+  "describe block": {
+    "scope": "javascript,typescript",
+    "prefix": "describe",
+    "body": [
+      "describe(\"${1:description}\", () => {",
+      "  it(\"${2:passe}\", () => {",
+      "    $0",
+      "  });",
+      "});",
+    ],
+    "description": "Bloc describe + it Mocha/Cypress",
+  },
+  "it block": {
+    "scope": "javascript,typescript",
+    "prefix": "it",
+    "body": ["it(\"${1:description}\", () => {", "  $0", "});"],
+    "description": "Bloc it Mocha/Cypress",
+  },
+  "beforeEach block": {
+    "scope": "javascript,typescript",
+    "prefix": "beforeEach",
+    "body": ["beforeEach(() => {", "  $0", "});"],
+    "description": "Bloc beforeEach Mocha/Cypress",
+  },
+  "cy.visit login": {
+    "scope": "javascript,typescript",
+    "prefix": "cyvisit",
+    "body": ["cy.visit(\"${1:/login}\");"],
+    "description": "cy.visit",
+  },
+}

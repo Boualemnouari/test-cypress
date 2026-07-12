@@ -1,6 +1,6 @@
 {
-	"id": 1,
-	"username": "johndoe",
-	"password": "s3cret",
-	"email": "johndoe@example.com"
+  "id": 1,
+  "username": "johndoe",
+  "password": "s3cret",
+  "email": "johndoe@example.com"
 }
