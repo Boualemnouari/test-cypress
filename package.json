@@ -12,11 +12,17 @@
   "description": "",
   "devDependencies": {
     "cypress": "^15.18.1",
+    "eslint": "^9.39.5",
     "husky": "^9.1.7",
     "lint-staged": "^16.4.0",
     "prettier": "3.9.5"
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   }
 }

@@ -30,3 +30,11 @@ export const loginWithFixture = (overrides = {}) => {
     loginWithUser({ ...fixtureUser, ...overrides });
   });
 };
+Cypress.Commands.add("loginnew", () => {
+  cy.fixture("user").then((user) => {
+    cy.visit("/login");
+    cy.get('[data-testid="signin-username"]').type(user.username);
+    cy.get('[data-testid="signin-password"]').type(user.password);
+    cy.get('[data-testid="signin-submit"]').click();
+  });
+});
