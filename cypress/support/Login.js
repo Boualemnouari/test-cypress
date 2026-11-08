@@ -7,11 +7,11 @@ export const loginSelectors = {
 };
 
 // Remplit les champs username/password du formulaire.
-// clear() garantit un champ vide avant de taper, trim() retire les espaces
-// accidentels (utile pour les tests de tolérance aux espaces).
+// clear() garantit un champ vide avant de taper. Les valeurs sont tapées
+// telles quelles (pas de trim) pour pouvoir tester la tolérance aux espaces.
 export const fillLoginForm = (username, password) => {
-  cy.get(loginSelectors.username).clear().type(String(username).trim());
-  cy.get(loginSelectors.password).clear().type(String(password).trim());
+  cy.get(loginSelectors.username).clear().type(String(username));
+  cy.get(loginSelectors.password).clear().type(String(password));
 };
 
 // Se rend sur la page de login, remplit le formulaire avec l'utilisateur
@@ -30,11 +30,3 @@ export const loginWithFixture = (overrides = {}) => {
     loginWithUser({ ...fixtureUser, ...overrides });
   });
 };
-Cypress.Commands.add("loginnew", () => {
-  cy.fixture("user").then((user) => {
-    cy.visit("/login");
-    cy.get('[data-testid="signin-username"]').type(user.username);
-    cy.get('[data-testid="signin-password"]').type(user.password);
-    cy.get('[data-testid="signin-submit"]').click();
-  });
-});

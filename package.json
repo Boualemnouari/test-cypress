@@ -1,9 +1,11 @@
 {
   "name": "test-cypress",
   "version": "1.0.0",
-  "main": "index.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cypress run",
+    "cy:open": "cypress open",
+    "format": "prettier --write .",
     "prepare": "husky"
   },
   "keywords": [],
@@ -19,10 +21,5 @@
   },
   "lint-staged": {
     "**/*": "prettier --write --ignore-unknown"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
   }
 }

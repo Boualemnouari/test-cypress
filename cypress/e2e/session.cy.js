@@ -1,12 +1,14 @@
+import { fillLoginForm, loginSelectors } from "../support/Login";
+
 // Vérifie qu'un clic sur "Se connecter" sans remplir le formulaire
 // ne permet pas de se connecter (on doit rester sur /login).
 describe("clique “Se connecter” sans rien saisir", () => {
   it("ne passe pas", () => {
     cy.visit("/login");
     // Les champs doivent être vides avant la soumission
-    cy.get('[data-testid="signin-username"]').should("have.value", "");
-    cy.get('[data-testid="signin-password"]').should("have.value", "");
-    cy.get('[data-testid="signin-submit"]').click();
+    cy.get(loginSelectors.username).should("have.value", "");
+    cy.get(loginSelectors.password).should("have.value", "");
+    cy.get(loginSelectors.submit).click();
     // Aucune redirection : on reste sur la page de login
     cy.url().should("include", "/login");
   });
@@ -18,15 +20,9 @@ describe("connexion ok meme avec des espaces", () => {
   it("passe", () => {
     cy.fixture("user").then((user) => {
       cy.visit("/login");
-      // Espace ajouté après le username, puis retiré via trim()
-      cy.get('[data-testid="signin-username"]').type(
-        `${user.username} `.trim(),
-      );
-      // Espace ajouté avant le password, puis retiré via trim()
-      cy.get('[data-testid="signin-password"]').type(
-        ` ${user.password}`.trim(),
-      );
-      cy.get('[data-testid="signin-submit"]').click();
+      // Espaces réellement tapés autour des identifiants
+      fillLoginForm(` ${user.username} `, ` ${user.password} `);
+      cy.get(loginSelectors.submit).click();
       // La connexion doit aboutir sur le dashboard
       cy.url().should("include", "/dashboard");
     });
